@@ -1,5 +1,5 @@
 echo "🔍 Vérification du code frontend..."
-cd front && npm run lint
+cd ../front && npm run lint
 
 echo "🔍 Vérification du code backend..."
-cd back && npm run lint
+cd ../back && npm run lint
