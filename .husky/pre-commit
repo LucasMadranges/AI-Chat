@@ -1,0 +1,9 @@
+echo "🔍 Vérification du code front..."
+cd ./front 
+npm run lint
+npx prettier --write .
+
+echo "🔍 Vérification du code back..."
+cd ../back
+npm run lint
+npx prettier --write .
