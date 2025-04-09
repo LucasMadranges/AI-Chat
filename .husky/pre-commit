@@ -1,1 +1,2 @@
-npm run lint-staged
+cd ./front/ && npm run lint
+cd ./back/ && npm run lint

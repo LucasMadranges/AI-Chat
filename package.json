@@ -9,8 +9,6 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "front/**/*.{js,jsx,ts,tsx}": ["eslint --fix"],
-    "back/**/*.{js,ts}": ["eslint --fix"]
+    "*.{js,jsx,ts,tsx}": ["eslint --fix"]
   }
-
 }
