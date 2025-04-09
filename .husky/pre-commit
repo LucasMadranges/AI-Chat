@@ -1,9 +1,9 @@
 echo "🔍 Vérification du code front..."
 cd ./front 
-npm run lint
 npx prettier --write .
+npm run lint
 
 echo "🔍 Vérification du code back..."
 cd ../back
-npm run lint
 npx prettier --write .
+npm run lint
