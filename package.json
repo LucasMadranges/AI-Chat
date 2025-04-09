@@ -9,6 +9,7 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["eslint --fix"]
+    "front": ["cd ./front/", "npm run lint"],
+    "back": ["cd ./back/", "npm run lint"]
   }
 }
