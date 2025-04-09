@@ -1,0 +1,53 @@
+services:
+  front-chatai:
+    image: node:22
+    container_name: front-chatai
+    working_dir: /app
+    volumes:
+      - ./front:/app
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && npm run dev"
+    depends_on:
+      - back-chatai
+      - db-chatai
+    env_file:
+      - ./front/.env.local
+    networks:
+      - networkChatAI
+  
+  back-chatai:
+    image: node:22
+    container_name: back-chatai
+    working_dir: /app
+    volumes:
+      - ./back:/app
+    ports:
+      - "4000:4000"
+    command: sh -c "npm install && npm run start:dev"
+    depends_on:
+      - db-chatai
+    env_file:
+      - ./back/.env
+    networks:
+      - networkChatAI
+
+  db-chatai:
+    image: postgres:13
+    container_name: db-chatai
+    env_file:
+      - .env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - networkChatAI
+
+volumes:
+  postgres-data:
+
+networks:
+  networkChatAI:
+    driver: bridge
+    name: networkChatAI
