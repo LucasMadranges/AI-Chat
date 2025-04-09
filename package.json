@@ -5,6 +5,6 @@
     "lint-staged": "^15.5.0"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
   }
 }
