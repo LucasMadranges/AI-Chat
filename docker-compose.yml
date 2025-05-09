@@ -35,8 +35,10 @@ services:
   db-chatai:
     image: postgres:13
     container_name: db-chatai
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=chatai-db
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
