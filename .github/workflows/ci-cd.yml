@@ -41,9 +41,9 @@ jobs:
         service: [front, back]
         include:
           - service: front
-            context: ./thread
+            context: ./front
           - service: back
-            context: ./sender
+            context: ./back
 
     steps:
       - name: Checkout repository
@@ -74,12 +74,10 @@ jobs:
       matrix:
         service: [front, back]
         include:
-          - service: thread
-            context: ./thread
-          - service: sender
-            context: ./sender
-          - service: api
-            context: ./api
+          - service: front
+            context: ./front
+          - service: back
+            context: ./back
 
     steps:
       - name: Checkout repository
@@ -96,11 +94,11 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.FORUM_TOKEN }}
+          password: ${{ secrets.CHATAI_FORUM }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: ${{ matrix.context }}
           push: true
-          tags: ghcr.io/lucasmadranges/forum/${{ matrix.service }}:latest
+          tags: ghcr.io/lucasmadranges/chatai/${{ matrix.service }}:latest
