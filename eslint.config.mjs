@@ -1,14 +1,18 @@
 import prettierPlugin from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
+import unusedImportsPlugin from 'eslint-plugin-unused-imports';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
 
 const processEnv = typeof process !== 'undefined' ? process.env : { NODE_ENV: 'development' };
 
 export default [
-  // Configuration de base
+  // Fichiers à ignorer globalement
   {
     ignores: [
       'node_modules/**',
       'dist/**',
+      'back/dist/**',
       'build/**',
       '.github/**',
       '*.md',
@@ -19,20 +23,21 @@ export default [
       '.husky/**',
     ],
   },
-  // Configuration commune
+
+  // Config commune JS/TS à tout le repo
   {
-    files: ['**/*.js'],
+    files: ['**/*.{js,ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
       globals: {
-        // Définir les globals nécessaires pour tous les fichiers
         console: 'readonly',
         process: 'readonly',
       },
     },
     plugins: {
       prettier: prettierPlugin,
+      'unused-imports': unusedImportsPlugin,
     },
     rules: {
       'prettier/prettier': 'error',
@@ -46,14 +51,15 @@ export default [
         },
       ],
       'no-undef': 'error',
+      'unused-imports/no-unused-imports': 'error',
     },
   },
-  // Configuration pour l'API (backend)
+
+  // Backend (API / Node)
   {
-    files: ['back/**/*.js'],
+    files: ['back/**/*.{js,ts,tsx}'],
     languageOptions: {
       globals: {
-        // Variables globales Node.js
         exports: 'readonly',
         require: 'readonly',
         process: 'readonly',
@@ -65,12 +71,16 @@ export default [
       'no-process-exit': 'off',
     },
   },
-  // Configuration pour les tests Jest
+
+  // Tests Jest du back
   {
-    files: ['back/**/__tests__/**/*.js', 'back/**/*.test.js', 'back/**/*.spec.js'],
+    files: [
+      'back/**/__tests__/**/*.{js,ts,tsx}',
+      'back/**/*.test.{js,ts,tsx}',
+      'back/**/*.spec.{js,ts,tsx}',
+    ],
     languageOptions: {
       globals: {
-        // Variables globales Jest
         jest: 'readonly',
         describe: 'readonly',
         it: 'readonly',
@@ -85,12 +95,12 @@ export default [
       },
     },
   },
-  // Configuration pour le front
+
+  // Frontend (navigateur)
   {
-    files: ['front/**/*.js'],
+    files: ['front/**/*.{js,ts,tsx}'],
     languageOptions: {
       globals: {
-        // Variables globales de navigateur
         document: 'readonly',
         window: 'readonly',
         fetch: 'readonly',
@@ -100,8 +110,10 @@ export default [
       'no-alert': 'warn',
     },
   },
+
+  // JS à la racine (ex: config)
   {
-    files: ['*.js'], // Pour tous les JS à la racine (commitlint.config.js, etc.)
+    files: ['*.{js,ts,tsx}'],
     languageOptions: {
       globals: {
         module: 'readonly',
@@ -113,6 +125,41 @@ export default [
       },
     },
   },
-  // Intégration de Prettier
+
+  // TypeScript strict, sélectionne le tsconfig selon le sous-dossier
+  {
+    files: ['back/**/*.ts', 'back/**/*.tsx'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: './back/tsconfig.json',
+        tsconfigRootDir: process.cwd(),
+        ecmaVersion: 2022,
+        sourceType: 'module',
+      },
+    },
+    plugins: { '@typescript-eslint': tseslint },
+    rules: {
+      ...tseslint.configs.recommended.rules,
+    },
+  },
+  {
+    files: ['front/**/*.ts', 'front/**/*.tsx'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: './front/tsconfig.json',
+        tsconfigRootDir: process.cwd(),
+        ecmaVersion: 2022,
+        sourceType: 'module',
+      },
+    },
+    plugins: { '@typescript-eslint': tseslint },
+    rules: {
+      ...tseslint.configs.recommended.rules,
+    },
+  },
+
+  // Intégration de Prettier à la fin (toujours après tout le reste !)
   prettierConfig,
 ];

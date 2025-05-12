@@ -1,5 +1,5 @@
 export default function ChatHistory() {
-  const arrayChat = Array.from({ length: 10 }, (_, i) => ({
+  const arrayChat = Array.from({ length: 10 }, () => ({
     title: 'First question',
   }));
 
