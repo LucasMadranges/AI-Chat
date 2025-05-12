@@ -1,4 +1,3 @@
-// domain/users/user.repository.ts
 import { User } from './users.entity';
 
 export const USER_REPOSITORY = Symbol('USER_REPOSITORY');
