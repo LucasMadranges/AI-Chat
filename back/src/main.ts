@@ -13,7 +13,6 @@ async function bootstrap() {
     .setTitle('Chat AI')
     .setDescription('API Docs pour Chat AI')
     .setVersion('1.0')
-    .addTag('AI')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, documentFactory);

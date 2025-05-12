@@ -6,6 +6,7 @@ import { FindUsersByIdUsecase } from '../application/users/usecases/find-users-b
 import { FindUsersByEmailUsecase } from '../application/users/usecases/find-users-by-email.usecase';
 import { UpdateUsersUsecase } from '../application/users/usecases/update-users.usecase';
 import { DeleteUsersUsecase } from '../application/users/usecases/delete-users.usecase';
+import { UpdateUsersDto } from '../application/users/dto/update-users.dto';
 
 @Controller('users')
 export class UsersController {
@@ -39,7 +40,7 @@ export class UsersController {
   }
 
   @Patch(':id')
-  updateUser(@Param('id', ParseIntPipe) id: number, @Body() data: CreateUsersDto) {
+  updateUser(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateUsersDto) {
     return this.updateUsersUsecase.execute(id, data);
   }
 

@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { IMessageRepository, MESSAGE_REPOSITORY } from '../../../domain/message/message.repository';
 import { Message } from '../../../domain/message/message.entity';
+import { IMessageRepository, MESSAGE_REPOSITORY } from '../../../domain/message/message.repository';
 
 @Injectable()
 export class SendMessageUsecase {
