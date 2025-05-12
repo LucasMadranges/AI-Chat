@@ -33,5 +33,6 @@ import { CreateMessageUsecase } from '../application/message/usecases/create-mes
       useClass: GeminiRepository,
     },
   ],
+  exports: [MESSAGE_REPOSITORY],
 })
 export class MessageModule {}
