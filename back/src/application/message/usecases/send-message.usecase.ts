@@ -1,15 +1,15 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Message } from '../../../domain/message/message.entity';
-import { IMessageRepository, MESSAGE_REPOSITORY } from '../../../domain/message/message.repository';
+import { IGeminiRepository, GEMINI_REPOSITORY } from '../../../domain/message/gemini.repository';
+import { Gemini } from '../../../domain/message/gemini.entity';
 
 @Injectable()
 export class SendMessageUsecase {
   constructor(
-    @Inject(MESSAGE_REPOSITORY)
-    private readonly messageRepository: IMessageRepository
+    @Inject(GEMINI_REPOSITORY)
+    private readonly geminiRepository: IGeminiRepository
   ) {}
 
-  async execute(message: string): Promise<Message | null> {
-    return await this.messageRepository.sendMessage(message);
+  async execute(message: string): Promise<Gemini | null> {
+    return await this.geminiRepository.sendMessage(message);
   }
 }

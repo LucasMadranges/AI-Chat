@@ -15,7 +15,17 @@ model Users {
   password String
 }
 
+model Chat {
+  id        Int       @id @default(autoincrement())
+  label     String
+  createdAt DateTime  @default(now())
+  messages  Message[]
+}
+
 model Message {
-  id      Int    @id @default(autoincrement())
-  message String
+  id        Int      @id @default(autoincrement())
+  message   String
+  createdAt DateTime @default(now())
+  chatId    Int
+  chat      Chat     @relation(fields: [chatId], references: [id])
 }

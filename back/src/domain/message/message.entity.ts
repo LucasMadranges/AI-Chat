@@ -1,8 +1,10 @@
 export class Message {
-  constructor(private readonly message: string) {}
+  constructor(
+    private readonly message: string,
+    private readonly chatId: number
+  ) {}
 
-  // règle métier potentielle : on pourrait hash ici si besoin
-  static sendMessage(message: string): Message {
-    return new Message(message);
+  static readAll(data: Message): Message {
+    return new Message(data.message, data.chatId);
   }
 }

@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { IMessageRepository } from '../../domain/message/message.repository';
-import { Message } from '../../domain/message/message.entity';
+import { IGeminiRepository } from '../../domain/message/gemini.repository';
 import axios from 'axios';
+import { Gemini } from '../../domain/message/gemini.entity';
 
 @Injectable()
-export class MessageRepository implements IMessageRepository {
+export class GeminiRepository implements IGeminiRepository {
   constructor() {}
 
-  async sendMessage(message: string): Promise<Message | null> {
+  async sendMessage(message: string): Promise<Gemini | null> {
     const res = await axios.post(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API}`,
       {
