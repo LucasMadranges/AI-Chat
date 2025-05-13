@@ -12,7 +12,7 @@ export class MessageRepository implements IMessageRepository {
 
     if (!messages) return null;
 
-    return messages.map(m => new Message(m.message, m.chatId));
+    return messages.map(m => new Message(m.message, m.isGemini, m.chatId));
   }
 
   async readMessagesByChat(chatId: number): Promise<Message[] | null> {
@@ -24,7 +24,7 @@ export class MessageRepository implements IMessageRepository {
 
     if (!messages) return null;
 
-    return messages.map(m => new Message(m.message, m.chatId));
+    return messages.map(m => new Message(m.message, m.isGemini, m.chatId));
   }
 
   async createMessage(message: string, chatId: number): Promise<Message | null> {
@@ -35,6 +35,6 @@ export class MessageRepository implements IMessageRepository {
       },
     });
 
-    return new Message(created.message, created.chatId);
+    return new Message(created.message, created.isGemini, created.chatId);
   }
 }

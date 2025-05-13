@@ -32,6 +32,8 @@ export default function ChatHistory() {
       <div className="flex flex-col gap-4 overflow-auto h-[calc(100svh-150px)]">
         {loading ? (
           <div>Chargement...</div>
+        ) : items.length === 0 ? (
+          <div>Aucun chat</div>
         ) : (
           items.map((item: { id: number; label: string }, index: number) => (
             <Link
