@@ -1,10 +1,9 @@
+'use client';
 import Link from 'next/link';
+import useGetChats from '@/libs/hooks/useGetChats';
 
 export default function ChatHistory() {
-  const arrayChat = Array.from({ length: 10 }, () => ({
-    title: 'First question',
-    chatId: 1,
-  }));
+  const { items, loading } = useGetChats();
 
   return (
     <div className={'w-1/5 border-r border-gray-200 p-4'}>
@@ -30,18 +29,22 @@ export default function ChatHistory() {
         />
       </div>
       <hr className={'mb-8 border-gray-200'} />
-      <div className={'flex flex-col gap-4 overflow-auto h-[calc(100svh-150px)]'}>
-        {arrayChat.map((item, index) => (
-          <Link
-            href={String(item.chatId)}
-            key={index}
-            className={
-              'cursor-pointer border border-gray-200 rounded-lg p-2 shadow transition hover:bg-gray-50 active:scale-y-95 active:shadow-none'
-            }
-          >
-            {item.title}
-          </Link>
-        ))}
+      <div className="flex flex-col gap-4 overflow-auto h-[calc(100svh-150px)]">
+        {loading ? (
+          <div>Chargement...</div>
+        ) : (
+          items.map((item: { id: number; label: string }, index: number) => (
+            <Link
+              href={String(item.id)}
+              key={index}
+              className={
+                'cursor-pointer border border-gray-200 rounded-lg p-2 shadow transition hover:bg-gray-50 active:scale-y-95 active:shadow-none'
+              }
+            >
+              {item.label}
+            </Link>
+          ))
+        )}
       </div>
     </div>
   );

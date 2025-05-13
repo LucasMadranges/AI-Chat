@@ -12,7 +12,7 @@ export class PrismaChatRepository implements IChatRepository {
 
     if (!chat) return null;
 
-    return chat.map(c => new Chat(c.label));
+    return chat.map(c => new Chat(c.id, c.label));
   }
 
   async createChat(label: string): Promise<Chat | null> {
@@ -23,6 +23,6 @@ export class PrismaChatRepository implements IChatRepository {
     });
 
     if (!created) return null;
-    else return new Chat(created.label);
+    else return new Chat(created.id, created.label);
   }
 }
