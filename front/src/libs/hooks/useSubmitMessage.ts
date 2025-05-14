@@ -2,17 +2,18 @@
 import { FormEvent, useState } from 'react';
 import api from '@/libs/api/axiosConfig';
 
-export function useSubmitMessage() {
+export function useSubmitMessage(chatId: number) {
   const [message, setMessage] = useState('');
 
   async function handleSubmitIA(e: FormEvent) {
     e.preventDefault();
 
-    const res = await api.post(`/message`, {
+    await api.post(`/message/gemini`, {
       message,
+      chatId,
     });
 
-    setMessage(res.data);
+    setMessage('');
   }
 
   return {

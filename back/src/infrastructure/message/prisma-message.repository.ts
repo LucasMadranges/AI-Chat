@@ -27,11 +27,12 @@ export class MessageRepository implements IMessageRepository {
     return messages.map(m => new Message(m.message, m.isGemini, m.chatId));
   }
 
-  async createMessage(message: string, chatId: number): Promise<Message | null> {
+  async createMessage(message: string, isGemini: boolean, chatId: number): Promise<Message | null> {
     const created = await this.prisma.message.create({
       data: {
-        message: message,
-        chatId: chatId,
+        message,
+        isGemini,
+        chatId,
       },
     });
 

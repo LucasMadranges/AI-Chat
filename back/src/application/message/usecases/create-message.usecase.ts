@@ -9,7 +9,7 @@ export class CreateMessageUsecase {
     private readonly messageRepository: IMessageRepository
   ) {}
 
-  async execute(message: string, chatId: number): Promise<Message | null> {
-    return await this.messageRepository.createMessage(message, chatId);
+  async execute(message: string, isGemini: boolean, chatId: number): Promise<Message | null> {
+    return await this.messageRepository.createMessage(message, isGemini, chatId);
   }
 }

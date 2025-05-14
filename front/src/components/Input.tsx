@@ -5,11 +5,13 @@ export default function Input({
   setValue,
   handleSubmit,
   placeholder,
+  disabled,
 }: {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   handleSubmit: FormEventHandler<HTMLInputElement>;
   placeholder: string;
+  disabled?: boolean;
 }) {
   return (
     <input
@@ -19,6 +21,7 @@ export default function Input({
       value={value}
       onChange={e => setValue(e.target.value)}
       onSubmit={handleSubmit}
+      disabled={disabled}
     />
   );
 }

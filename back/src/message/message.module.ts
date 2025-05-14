@@ -10,8 +10,10 @@ import { MessageRepository } from '../infrastructure/message/prisma-message.repo
 import { ReadMessagesUsecase } from '../application/message/usecases/read-messages.usecase';
 import { ReadMessagesByChatUsecase } from '../application/message/usecases/read-messages-by-chat.usecase';
 import { CreateMessageUsecase } from '../application/message/usecases/create-message.usecase';
+import { HandleMessageUsecase } from '../application/message/usecases/handle-message.usecase';
 
 @Module({
+  imports: [],
   controllers: [MessageController],
   providers: [
     // Usecase
@@ -21,6 +23,7 @@ import { CreateMessageUsecase } from '../application/message/usecases/create-mes
 
     // Gemini
     SendMessageUsecase,
+    HandleMessageUsecase,
 
     // Service
     PrismaService,

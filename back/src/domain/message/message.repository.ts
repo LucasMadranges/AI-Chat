@@ -7,5 +7,5 @@ export interface IMessageRepository {
 
   readMessagesByChat(chatId: number): Promise<Message[] | null>;
 
-  createMessage(message: string, chatId: number): Promise<Message | null>;
+  createMessage(message: string, isGemini: boolean, chatId: number): Promise<Message | null>;
 }

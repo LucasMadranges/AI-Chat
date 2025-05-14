@@ -5,7 +5,7 @@ import Button from '@/components/Button';
 import { useSubmitMessage } from '@/libs/hooks/useSubmitMessage';
 
 export default function Chat({ chatId }: { chatId: number }) {
-  const { message, setMessage, handleSubmitIA } = useSubmitMessage();
+  const { message, setMessage, handleSubmitIA } = useSubmitMessage(chatId);
 
   return (
     <div className={'px-32 py-8 w-full flex flex-col justify-between'}>

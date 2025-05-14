@@ -1,4 +1,5 @@
 import useGetMessage from '@/libs/hooks/useGetMessage';
+import ReactMarkdown from 'react-markdown';
 
 export default function Message({ chatId }: { chatId: number }) {
   const { items, loading } = useGetMessage(chatId);
@@ -15,7 +16,7 @@ export default function Message({ chatId }: { chatId: number }) {
             key={index}
             className={`${item.isGemini ? 'bg-gray-400' : 'bg-blue-400 text-white self-end'} w-fit rounded-lg px-4 py-2`}
           >
-            {item.message}
+            <ReactMarkdown>{item.message}</ReactMarkdown>
           </div>
         ))
       )}

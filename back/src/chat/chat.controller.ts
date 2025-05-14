@@ -15,7 +15,7 @@ export class ChatController {
     return this.readChatUsecase.execute();
   }
 
-  @Post(':chatId')
+  @Post()
   createChat(@Body() data: CreateChatDto) {
     return this.createChatUsecase.execute(data.label);
   }
