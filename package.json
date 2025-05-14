@@ -16,9 +16,8 @@
   },
   "type": "module",
   "workspaces": [
-    "api",
-    "thread",
-    "sender"
+    "front",
+    "back"
   ],
   "scripts": {
     "lint": "eslint .",
