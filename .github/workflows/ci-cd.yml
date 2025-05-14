@@ -57,6 +57,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright browsers
+        if: matrix.service == 'front'
         run: npx playwright install
         working-directory: ${{ matrix.context }}
 
