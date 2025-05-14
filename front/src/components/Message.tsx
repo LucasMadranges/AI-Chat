@@ -13,6 +13,7 @@ export default function Message({ chatId }: { chatId: number }) {
       ) : (
         items.map((item: { message: string; isGemini: number }, index: number) => (
           <div
+            data-testid={'message'}
             key={index}
             className={`${item.isGemini ? 'bg-gray-400' : 'bg-blue-400 text-white self-end'} w-fit rounded-lg px-4 py-2`}
           >

@@ -9,6 +9,7 @@ export default function Button({
 }) {
   return (
     <button
+      data-testid={'click-button'}
       className={
         'bg-blue-500 rounded-full p-2 hover:bg-blue-600 cursor-pointer transition shadow active:scale-95 active:shadow-none'
       }

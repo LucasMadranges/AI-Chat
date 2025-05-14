@@ -23,6 +23,7 @@ export class GeminiRepository implements IGeminiRepository {
       }
     );
 
-    return res.data.candidates[0].content.parts[0].text;
+    const text = res.data.candidates[0].content.parts[0].text;
+    return new Gemini(text);
   }
 }

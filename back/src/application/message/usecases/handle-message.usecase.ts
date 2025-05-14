@@ -17,6 +17,8 @@ export class HandleMessageUsecase {
 
     const aiResponse = await this.geminiRepository.sendMessage(message);
 
-    return await this.messageRepository.createMessage(String(aiResponse), true, chatId);
+    const geminiMessage = aiResponse ? aiResponse['message'] : '';
+
+    return await this.messageRepository.createMessage(geminiMessage, true, chatId);
   }
 }
