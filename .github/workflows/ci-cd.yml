@@ -37,7 +37,7 @@ jobs:
 
     strategy:
       matrix:
-        service: [ front, back ]
+        service: [front, back]
         include:
           - service: front
             context: ./front
@@ -58,7 +58,7 @@ jobs:
 
       - name: Build front
         if: matrix.service == 'front'
-        run: npm run build
+        run: npm run build --workspace=front
         working-directory: ${{ matrix.context }}
 
       - name: Install Playwright browsers
@@ -72,12 +72,12 @@ jobs:
 
   packages:
     name: Build & Publish Docker Image
-    needs: [ lint-and-format, tests ]
+    needs: [lint-and-format, tests]
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        service: [ front, back ]
+        service: [front, back]
         include:
           - service: front
             context: ./front

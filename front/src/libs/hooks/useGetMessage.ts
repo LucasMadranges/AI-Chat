@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 export default function useGetMessage(chatId: number) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<unknown | null>(null);
 
   useEffect(() => {
     async function fetchChats() {

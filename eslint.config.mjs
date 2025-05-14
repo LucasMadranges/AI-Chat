@@ -128,11 +128,11 @@ export default [
 
   // TypeScript strict, sélectionne le tsconfig selon le sous-dossier
   {
-    files: ['back/**/*.ts', 'back/**/*.tsx'],
+    files: ['front/**/*.ts', 'front/**/*.tsx'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: './back/tsconfig.json',
+        project: ['./front/tsconfig.json'],
         tsconfigRootDir: process.cwd(),
         ecmaVersion: 2022,
         sourceType: 'module',
@@ -143,12 +143,13 @@ export default [
       ...tseslint.configs.recommended.rules,
     },
   },
+
   {
-    files: ['front/**/*.ts', 'front/**/*.tsx'],
+    files: ['back/**/*.ts', 'back/**/*.tsx'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: './front/tsconfig.json',
+        project: ['./back/tsconfig.json'],
         tsconfigRootDir: process.cwd(),
         ecmaVersion: 2022,
         sourceType: 'module',
