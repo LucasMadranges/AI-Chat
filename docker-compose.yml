@@ -6,7 +6,7 @@ services:
     volumes:
       - ./front:/app
     ports:
-      - "3000:3000"
+      - '3000:3000'
     command: sh -c "npm install && npm run dev"
     depends_on:
       - back-chatai
@@ -15,7 +15,7 @@ services:
       - ./front/.env.local
     networks:
       - networkChatAI
-  
+
   back-chatai:
     image: node:22
     container_name: back-chatai
@@ -23,7 +23,7 @@ services:
     volumes:
       - ./back:/app
     ports:
-      - "4000:4000"
+      - '4000:4000'
     command: sh -c "npm install && npm run start:dev"
     depends_on:
       - db-chatai
@@ -35,12 +35,14 @@ services:
   db-chatai:
     image: postgres:13
     container_name: db-chatai
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=chatai-db
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - '5432:5432'
     networks:
       - networkChatAI
 
